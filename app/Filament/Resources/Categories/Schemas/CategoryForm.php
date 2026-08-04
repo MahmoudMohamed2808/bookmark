@@ -39,7 +39,12 @@ class CategoryForm
                     ->required()
                     ->maxLength(255)
                     ->unique(ignoreRecord: true),
-                TextInput::make('icon'),
+                TextInput::make('icon')
+                    ->placeholder('heroicon-o-folder')
+                    ->rules(['regex:/^(heroicon-o-)?o-[a-z0-9-]+$/'])
+                    ->validationMessages([
+                        'regex' => 'The icon must be a valid Heroicon name, e.g. heroicon-o-folder.',
+                    ]),
                 ColorPicker::make('color'),
                 TextInput::make('sort_order')
                     ->numeric()

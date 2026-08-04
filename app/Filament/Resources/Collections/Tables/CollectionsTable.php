@@ -19,7 +19,7 @@ class CollectionsTable
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable()
-                    ->icon(fn (Collection $record): ?string => $record->icon ?: null)
+                    ->icon(fn (Collection $record): ?string => $record->iconSvgName())
                     ->color(fn (Collection $record): ?string => $record->color ?: null),
                 TextColumn::make('description')
                     ->limit(50)

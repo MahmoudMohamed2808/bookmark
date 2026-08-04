@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Database\Factories\CollectionFactory;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,5 +38,21 @@ class Collection extends Model
         return $this->belongsToMany(Bookmark::class, 'collection_bookmark')
             ->withPivot('sort_order')
             ->withTimestamps();
+    }
+
+    /**
+     * Return the icon only if it is a valid Heroicon name.
+     */
+    public function iconSvgName(): ?string
+    {
+        $icon = $this->icon;
+
+        if ($icon === null || $icon === '') {
+            return null;
+        }
+
+        $name = preg_replace('/^heroicon-o-/', 'o-', $icon);
+
+        return Heroicon::tryFrom($name) !== null ? $icon : null;
     }
 }

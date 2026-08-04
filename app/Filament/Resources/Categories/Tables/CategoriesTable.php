@@ -18,7 +18,7 @@ class CategoriesTable
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable()
-                    ->icon(fn (Category $record): ?string => $record->icon ?: null)
+                    ->icon(fn (Category $record): ?string => $record->iconSvgName())
                     ->color(fn (Category $record): ?string => $record->color ?: null)
                     ->description(fn (Category $record): ?string => $record->parent?->name ? 'Parent: '.$record->parent->name : null),
                 TextColumn::make('slug')

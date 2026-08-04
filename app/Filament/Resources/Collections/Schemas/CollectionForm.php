@@ -33,7 +33,12 @@ class CollectionForm
                 Textarea::make('description')
                     ->rows(3)
                     ->columnSpanFull(),
-                TextInput::make('icon'),
+                TextInput::make('icon')
+                    ->placeholder('heroicon-o-folder')
+                    ->rules(['regex:/^(heroicon-o-)?o-[a-z0-9-]+$/'])
+                    ->validationMessages([
+                        'regex' => 'The icon must be a valid Heroicon name, e.g. heroicon-o-folder.',
+                    ]),
                 ColorPicker::make('color'),
                 Toggle::make('is_shared')
                     ->default(false),
